@@ -18,7 +18,7 @@ class CandidateController extends Controller
     public function index()
     {
         $candidates = Candidate::all();
-        $coins = Company::find(1)->coins;
+        $coins = Company::find(1)->wallet->coins;
         return view('candidates.index', compact('candidates', 'coins'));
     }
 
@@ -26,16 +26,21 @@ class CandidateController extends Controller
     {
         $companyId = 1;
 
-        if ($this->candidateService->contactCandidate($companyId, $candidate->id)) {
+        if ($this->candidateService->contactCandidate($companyId, $candidate)) {
             return response()->json(['message' => 'Candidate contacted successfully']);
         }
 
         return response()->json(['message' => 'Unable to contact candidate'], 400);
     }
 
-    public function hire()
+    public function hire(Candidate $candidate)
     {
-        // @todo
-        // Your code goes here...
+        $companyId = 1;
+
+        if($this->candidateService->hireCandidate($companyId, $candidate)){
+            return response()->json(['message' => 'Candidate hired successfully']);
+        }
+        
+        return response()->json(['message' => 'Unable to hire candidate'], 400);
     }
 }

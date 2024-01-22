@@ -7,6 +7,10 @@ use App\Models\Company;
 
 class CandidateRepository
 {
+    public function getCandidateById($candidateId){
+        return Candidate::find($candidateId);
+    }
+
     public function getCandidateEmailById($candidateId)
     {
         return Candidate::where('id', $candidateId)->value('email');

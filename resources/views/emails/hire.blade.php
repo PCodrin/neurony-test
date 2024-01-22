@@ -6,7 +6,7 @@
 
 <body>
     <h1>Hire Email</h1>
-    <p>Congratulations! You have been hired by {{ $company }}</p>
+    <p>Congratulations! You have been hired by {{ $companyName }}</p>
 </body>
 
 </html>

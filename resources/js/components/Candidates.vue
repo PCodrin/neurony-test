@@ -21,9 +21,9 @@
             }}</span>
         </div>
         <div class="p-6 float-right">
-          <button @click="contactCandidate(candidate)"
+          <button @click="contactCandidate(candidate)" :disabled="loading"
             class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Contact</button>
-          <button @click="hireCandidate(candidate)"
+          <button @click="hireCandidate(candidate)" :disabled="loading"
             class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 hover:bg-teal-100 rounded shadow">Hire</button>
         </div>
       </div>
@@ -44,6 +44,7 @@ export default {
   props: ['candidates'],
   data() {
     return {
+      loading: false,
       desiredStrengths: [
         'Vue.js', 'Laravel', 'PHP', 'TailwindCSS'
       ],
@@ -61,17 +62,25 @@ export default {
 
     async contactCandidate(candidate) {
       try {
+        this.loading = true;
         await candidateService.contactCandidate(candidate.id);
+        window.location.reload();
       } catch (error) {
         console.error('Error contacting candidate:', error);
+      } finally {
+        this.loading = false;
       }
     },
 
     async hireCandidate(candidate) {
       try {
+        this.loading = true;
         await candidateService.hireCandidate(candidate.id);
+        window.location.reload();
       } catch (error) {
         console.error('Error hiring candidate:', error);
+      } finally {
+        this.loading = false;
       }
     }
   }

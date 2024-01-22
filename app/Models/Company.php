@@ -11,9 +11,9 @@ class Company extends Model
 
     protected $fillable = ['name'];
 
-    public function wallets()
+    public function wallet()
     {
-        return $this->hasMany(Wallet::class);
+        return $this->hasOne(Wallet::class);
     }
 
     public function contactedCandidates()
