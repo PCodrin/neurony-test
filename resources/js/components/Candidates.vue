@@ -11,10 +11,13 @@
           <p class="text-gray-700 text-base">{{ candidate.description }}</p>
         </div>
         <div class="px-6 pt-4 pb-2"><span v-for="strength in JSON.parse(candidate.strengths)"
-            class="inline-block bg-gray-200  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ strength }}</span>
+            :class="['inline-block', 'rounded-full', 'px-3', 'py-1', 'text-sm', 'font-semibold', 'text-gray-700', 'mr-2', 'mb-2', isDesiredItem(strength, desiredStrengths)]">{{
+              strength }}</span>
         </div>
         <div class="px-6 pb-2"><span v-for="skill in JSON.parse(candidate.soft_skills)"
-            class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ skill }}</span>
+            :class="['inline-block', 'bg-gray-200', 'rounded-full', 'px-3', 'py-1', 'text-sm', 'font-semibold', 'text-gray-700', 'mr-2', 'mb-2', isDesiredItem(skill, desiredSkills)]">{{
+              skill
+            }}</span>
         </div>
         <div class="p-6 float-right">
           <button
@@ -28,15 +31,20 @@
 </template>
 
 <script>
-;
 export default {
   props: ['candidates'],
   data() {
     return {
       desiredStrengths: [
         'Vue.js', 'Laravel', 'PHP', 'TailwindCSS'
-      ]
+      ],
+      desiredSkills: ['Team player', 'Diplomacy']
     }
   },
+  methods: {
+    isDesiredItem(item, desiredArray) {
+      return desiredArray.includes(item) ? 'bg-green-400' : '';
+    }
+  }
 }
 </script>
