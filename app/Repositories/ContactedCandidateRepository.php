@@ -13,4 +13,11 @@ class ContactedCandidateRepository
             'candidate_id' => $candidateId,
         ]);
     }
+
+    public function hasBeenContacted($companyId, $candidateId)
+    {
+        return ContactedCandidate::where('company_id', $companyId)
+            ->where('candidate_id', $candidateId)
+            ->exists();
+    }
 }

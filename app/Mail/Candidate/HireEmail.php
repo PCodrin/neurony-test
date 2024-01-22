@@ -24,6 +24,6 @@ class HireEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Subject for Hire Email')->view('emails.candidate.hire');
+        return $this->subject('Subject for Hire Email')->view('emails.hire');
     }
 }

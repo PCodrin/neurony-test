@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services;
+
 use App\Interfaces\CandidateMailerInterface;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
