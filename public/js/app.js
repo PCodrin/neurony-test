@@ -5411,6 +5411,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     isDesiredItem: function isDesiredItem(item, desiredArray) {
       return desiredArray.includes(item) ? 'bg-green-400' : '';
+    },
+    isCandidateKnowingWordpress: function isCandidateKnowingWordpress(candidate) {
+      return JSON.parse(candidate.strengths).includes('Wordpress');
     }
   }
 });
@@ -28034,77 +28037,92 @@ var render = function () {
           "p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5",
       },
       _vm._l(_vm.candidates, function (candidate) {
-        return _c("div", { staticClass: "rounded overflow-hidden shadow-lg" }, [
-          _c("img", {
-            staticClass: "w-full",
-            attrs: { src: "/avatar.png", alt: "" },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "px-6 py-4" }, [
-            _c("div", { staticClass: "font-bold text-xl mb-2" }, [
-              _vm._v(_vm._s(candidate.name)),
+        return _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.isCandidateKnowingWordpress(candidate),
+                expression: "!isCandidateKnowingWordpress(candidate)",
+              },
+            ],
+            key: candidate.id,
+            staticClass: "rounded overflow-hidden shadow-lg",
+          },
+          [
+            _c("img", {
+              staticClass: "w-full",
+              attrs: { src: "/avatar.png", alt: "" },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "px-6 py-4" }, [
+              _c("div", { staticClass: "font-bold text-xl mb-2" }, [
+                _vm._v(_vm._s(candidate.name)),
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-gray-700 text-base" }, [
+                _vm._v(_vm._s(candidate.description)),
+              ]),
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "text-gray-700 text-base" }, [
-              _vm._v(_vm._s(candidate.description)),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "px-6 pt-4 pb-2" },
-            _vm._l(JSON.parse(candidate.strengths), function (strength) {
-              return _c(
-                "span",
-                {
-                  class: [
-                    "inline-block",
-                    "rounded-full",
-                    "px-3",
-                    "py-1",
-                    "text-sm",
-                    "font-semibold",
-                    "text-gray-700",
-                    "mr-2",
-                    "mb-2",
-                    _vm.isDesiredItem(strength, _vm.desiredStrengths),
-                  ],
-                },
-                [_vm._v(_vm._s(strength))]
-              )
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "px-6 pb-2" },
-            _vm._l(JSON.parse(candidate.soft_skills), function (skill) {
-              return _c(
-                "span",
-                {
-                  class: [
-                    "inline-block",
-                    "bg-gray-200",
-                    "rounded-full",
-                    "px-3",
-                    "py-1",
-                    "text-sm",
-                    "font-semibold",
-                    "text-gray-700",
-                    "mr-2",
-                    "mb-2",
-                    _vm.isDesiredItem(skill, _vm.desiredSkills),
-                  ],
-                },
-                [_vm._v(_vm._s(skill))]
-              )
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _vm._m(1, true),
-        ])
+            _c(
+              "div",
+              { staticClass: "px-6 pt-4 pb-2" },
+              _vm._l(JSON.parse(candidate.strengths), function (strength) {
+                return _c(
+                  "span",
+                  {
+                    class: [
+                      "inline-block",
+                      "rounded-full",
+                      "px-3",
+                      "py-1",
+                      "text-sm",
+                      "font-semibold",
+                      "text-gray-700",
+                      "mr-2",
+                      "mb-2",
+                      _vm.isDesiredItem(strength, _vm.desiredStrengths),
+                    ],
+                  },
+                  [_vm._v(_vm._s(strength))]
+                )
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "px-6 pb-2" },
+              _vm._l(JSON.parse(candidate.soft_skills), function (skill) {
+                return _c(
+                  "span",
+                  {
+                    class: [
+                      "inline-block",
+                      "bg-gray-200",
+                      "rounded-full",
+                      "px-3",
+                      "py-1",
+                      "text-sm",
+                      "font-semibold",
+                      "text-gray-700",
+                      "mr-2",
+                      "mb-2",
+                      _vm.isDesiredItem(skill, _vm.desiredSkills),
+                    ],
+                  },
+                  [_vm._v(_vm._s(skill))]
+                )
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _vm._m(1, true),
+          ]
+        )
       }),
       0
     ),

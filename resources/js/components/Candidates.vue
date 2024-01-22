@@ -4,7 +4,7 @@
       <h1 class="text-4xl font-bold">Candidates</h1>
     </div>
     <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-      <div v-for="candidate in candidates" class="rounded overflow-hidden shadow-lg">
+      <div v-for="candidate in candidates" :key="candidate.id" class="rounded overflow-hidden shadow-lg" v-show="!isCandidateKnowingWordpress(candidate)">
         <img class="w-full" src="/avatar.png" alt="">
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">{{ candidate.name }}</div>
@@ -44,6 +44,9 @@ export default {
   methods: {
     isDesiredItem(item, desiredArray) {
       return desiredArray.includes(item) ? 'bg-green-400' : '';
+    },
+    isCandidateKnowingWordpress(candidate){
+      return JSON.parse(candidate.strengths).includes('Wordpress');
     }
   }
 }
