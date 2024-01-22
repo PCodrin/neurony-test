@@ -4,7 +4,8 @@
       <h1 class="text-4xl font-bold">Candidates</h1>
     </div>
     <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-      <div v-for="candidate in candidates" :key="candidate.id" class="rounded overflow-hidden shadow-lg" v-show="!isCandidateKnowingWordpress(candidate)">
+      <div v-for="candidate in candidates" :key="candidate.id" class="rounded overflow-hidden shadow-lg"
+        v-show="!isCandidateKnowingWordpress(candidate)">
         <img class="w-full" src="/avatar.png" alt="">
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">{{ candidate.name }}</div>
@@ -20,9 +21,9 @@
             }}</span>
         </div>
         <div class="p-6 float-right">
-          <button
+          <button @click="contactCandidate(candidate)"
             class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Contact</button>
-          <button
+          <button @click="hireCandidate(candidate)"
             class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 hover:bg-teal-100 rounded shadow">Hire</button>
         </div>
       </div>
@@ -33,6 +34,7 @@
 </template>
 
 <script>
+import candidateService from '../services/CandidateService';
 import MvpCandidates from './MvpCandidates.vue';
 
 export default {
@@ -52,8 +54,25 @@ export default {
     isDesiredItem(item, desiredArray) {
       return desiredArray.includes(item) ? 'bg-green-400' : '';
     },
-    isCandidateKnowingWordpress(candidate){
+
+    isCandidateKnowingWordpress(candidate) {
       return JSON.parse(candidate.strengths).includes('Wordpress');
+    },
+
+    async contactCandidate(candidate) {
+      try {
+        await candidateService.contactCandidate(candidate.id);
+      } catch (error) {
+        console.error('Error contacting candidate:', error);
+      }
+    },
+
+    async hireCandidate(candidate) {
+      try {
+        await candidateService.hireCandidate(candidate.id);
+      } catch (error) {
+        console.error('Error hiring candidate:', error);
+      }
     }
   }
 }
