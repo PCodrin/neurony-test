@@ -17,7 +17,15 @@ class CandidateController extends Controller
 
     public function index()
     {
-        $candidates = Candidate::all();
+        $candidates = Candidate::with(['contactedCompanies', 'hiredCompanies'])
+        ->select(['id', 'name', 'description', 'strengths', 'soft_skills'])
+        ->get()
+        ->map(function ($candidate) {
+            $candidate->contacted = $candidate->contactedCompanies->isNotEmpty();
+            $candidate->hired = $candidate->hiredCompanies->isNotEmpty();
+            return $candidate;
+        });
+        
         $coins = Company::find(1)->wallet->coins;
         return view('candidates.index', compact('candidates', 'coins'));
     }
