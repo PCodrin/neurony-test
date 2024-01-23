@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CandidateRequest;
 use App\Models\Candidate;
 use App\Models\Company;
 use App\Services\CandidateService;
@@ -30,7 +31,7 @@ class CandidateController extends Controller
         return view('candidates.index', compact('candidates', 'coins'));
     }
 
-    public function contact(Candidate $candidate)
+    public function contact(CandidateRequest $request, Candidate $candidate)
     {
         $companyId = 1;
 
@@ -41,7 +42,7 @@ class CandidateController extends Controller
         return response()->json(['message' => 'Unable to contact candidate'], 400);
     }
 
-    public function hire(Candidate $candidate)
+    public function hire(CandidateRequest $request, Candidate $candidate)
     {
         $companyId = 1;
 
