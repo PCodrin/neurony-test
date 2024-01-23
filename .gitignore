@@ -23,3 +23,8 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+
+Dockerfile
+docker-compose.yml
+
+mysql-data

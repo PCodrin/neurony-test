@@ -21,9 +21,9 @@
             }}</span>
         </div>
         <div class="p-6 float-right">
-          <button @click="contactCandidate(candidate)" :disabled="loading || candidate.contacted"
+          <button @click="contactCandidate(candidate)" :disabled="loading || isContacted(candidate)"
             class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border disabled:bg-gray-200 disabled:cursor-not-allowed border-gray-400 rounded shadow">Contact</button>
-          <button @click="hireCandidate(candidate)" :disabled="loading || candidate.hired || !candidate.contacted"
+          <button @click="hireCandidate(candidate)" :disabled="loading || isHired(candidate) || !isContacted(candidate)"
             class="bg-green-400 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border disabled:bg-gray-200 disabled:cursor-not-allowed border-gray-400 hover:bg-teal-100 rounded shadow">Hire</button>
         </div>
       </div>
