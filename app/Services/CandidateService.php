@@ -39,10 +39,6 @@ class CandidateService
             return false;
         }
 
-        if ($this->contactedCandidateRepository->hasBeenContacted($companyId, $candidate->id)) {
-            return false;
-        }
-
         $coinsRequired = self::COINS_REQUIRED_CONTACT;
 
         if ($this->walletRepository->hasEnoughCoins($companyId, $coinsRequired)) {

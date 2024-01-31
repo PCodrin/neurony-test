@@ -2,10 +2,15 @@
 
 namespace App\Mail\Candidate;
 
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
 
-class ContactEmail extends Mailable
+class ContactEmail extends Mailable implements ShouldQueue
 {
+    use Queueable, SerializesModels;
+
     public $companyName;
 
     /**

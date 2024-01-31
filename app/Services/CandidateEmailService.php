@@ -11,7 +11,7 @@ class CandidateEmailService implements CandidateMailerInterface
     public function sendContactEmail($candidateEmail, $companyName)
     {
         try {
-            Mail::to($candidateEmail)->send(new \App\Mail\Candidate\ContactEmail($companyName));
+            Mail::to($candidateEmail)->queue(new \App\Mail\Candidate\ContactEmail($companyName));
             return true;
         } catch (\Exception $e) {
             Log::error('Error sending contact email: ' . $e->getMessage());
@@ -22,7 +22,7 @@ class CandidateEmailService implements CandidateMailerInterface
     public function sendHireEmail($candidateEmail, $companyName)
     {
         try {
-            Mail::to($candidateEmail)->send(new \App\Mail\Candidate\HireEmail($companyName));
+            Mail::to($candidateEmail)->queue(new \App\Mail\Candidate\HireEmail($companyName));
             return true;
         } catch (\Exception $e) {
             Log::error('Error sending hire email: ' . $e->getMessage());

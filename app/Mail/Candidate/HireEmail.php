@@ -2,10 +2,15 @@
 
 namespace App\Mail\Candidate;
 
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
 
-class HireEmail extends Mailable
+class HireEmail extends Mailable implements ShouldQueue
 {
+    use Queueable, SerializesModels;
+    
     public $companyName;
     /**
      * Create a new message instance.

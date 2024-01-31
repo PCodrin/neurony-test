@@ -28,3 +28,6 @@ Homestead.json
 docker-compose.yml
 
 mysql-data
+/caddy
+frankenphp
+frankenphp-worker.php

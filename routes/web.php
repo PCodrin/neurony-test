@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\Candidate\CandidateController;
+use App\Http\Controllers\Candidate\CandidateContactController;
+use App\Http\Controllers\Candidate\CandidateHireController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('homepage');
-});
+Route::inertia('/', 'app')->name('home');
 
-Route::get('candidates-list', [CandidateController::class, 'index']);
+Route::get('candidates-list', CandidateController::class)->name('candidates.index');
 
+Route::post('/candidates/{candidate}/contact', CandidateContactController::class)->name('candidates.contact');
+Route::post('/candidates/{candidate}/hire', CandidateHireController::class)->name('candidates.hire');
